@@ -12,6 +12,8 @@ struct DeckView: View {
     let onSwipeLeft: () -> Void
     let onUnlockTap: () -> Void
 
+    @State private var dragProgress: CGFloat = 0
+
     private let visibleCards = 3
 
     var body: some View {
@@ -25,17 +27,50 @@ struct DeckView: View {
                     isTopCard: offset == 0,
                     onSwipeRight: onSwipeRight,
                     onSwipeLeft: onSwipeLeft,
-                    onUnlockTap: onUnlockTap
+                    onUnlockTap: onUnlockTap,
+                    onDragProgress: offset == 0 ? { progress in
+                        withAnimation(.interactiveSpring(response: 0.15, dampingFraction: 0.8)) {
+                            dragProgress = min(progress, 1.0)
+                        }
+                    } : nil
                 )
                 .zIndex(Double(visibleCards - offset))
                 .offset(y: CGFloat(offset) * 8)
-                .scaleEffect(1 - CGFloat(offset) * 0.05)
-                .opacity(offset == 0 ? 1 : 0.7)
+                .scaleEffect(scaleForOffset(offset))
+                .opacity(opacityForOffset(offset))
                 .allowsHitTesting(offset == 0)
             }
         }
         .frame(maxWidth: .infinity)
         .frame(height: 420)
+        .onChange(of: currentIndex) {
+            // Reset drag progress when moving to next card
+            dragProgress = 0
+        }
+    }
+
+    // MARK: - Interactive Background Card Calculations
+
+    private func scaleForOffset(_ offset: Int) -> CGFloat {
+        if offset == 0 {
+            return 1.0
+        } else if offset == 1 {
+            // Scale from 0.9 -> 1.0 based on drag progress
+            return 0.9 + (dragProgress * 0.1)
+        } else {
+            return 0.85
+        }
+    }
+
+    private func opacityForOffset(_ offset: Int) -> Double {
+        if offset == 0 {
+            return 1.0
+        } else if offset == 1 {
+            // Opacity from 0.6 -> 1.0 based on drag progress
+            return 0.6 + (dragProgress * 0.4)
+        } else {
+            return 0.5
+        }
     }
 
     private var visibleCardIndices: [Int] {

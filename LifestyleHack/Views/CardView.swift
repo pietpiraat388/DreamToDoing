@@ -11,6 +11,7 @@ struct CardView: View {
     let onSwipeRight: () -> Void
     let onSwipeLeft: () -> Void
     let onUnlockTap: () -> Void
+    var onDragProgress: ((CGFloat) -> Void)?
 
     @State private var offset: CGSize = .zero
     @State private var rotation: Double = 0
@@ -33,7 +34,7 @@ struct CardView: View {
             }
         }
         .offset(offset)
-        .rotationEffect(.degrees(rotation))
+        .rotationEffect(.degrees(rotation), anchor: .bottom)
         .gesture(cardGesture)
         .animation(DesignSystem.Animation.cardSwipe, value: offset)
     }
@@ -180,37 +181,56 @@ struct CardView: View {
                 } else {
                     offset = gesture.translation
                     rotation = Double(gesture.translation.width / 20)
+
+                    // Report drag progress to parent for background card animation
+                    let progress = abs(gesture.translation.width) / swipeThreshold
+                    onDragProgress?(min(progress, 1.0))
                 }
             }
             .onEnded { gesture in
                 if showPremiumBadge {
-                    withAnimation(DesignSystem.Animation.bounce) {
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0)) {
                         offset = .zero
                         rotation = 0
                     }
                     onUnlockTap()
                 } else {
+                    let velocity = gesture.velocity.width
+
                     if gesture.translation.width > swipeThreshold {
-                        completeSwipe(direction: .right)
+                        completeSwipe(direction: .right, velocity: velocity)
                     } else if gesture.translation.width < -swipeThreshold {
-                        completeSwipe(direction: .left)
+                        completeSwipe(direction: .left, velocity: velocity)
                     } else {
-                        offset = .zero
-                        rotation = 0
+                        // Bouncy snap-back
+                        withAnimation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0)) {
+                            offset = .zero
+                            rotation = 0
+                        }
+                        onDragProgress?(0)
                     }
                 }
             }
     }
 
-    private func completeSwipe(direction: SwipeDirection) {
+    private func completeSwipe(direction: SwipeDirection, velocity: CGFloat) {
         let offscreenX: CGFloat = direction == .right ? 500 : -500
+        let exitRotation: Double = direction == .right ? 25 : -25
 
-        withAnimation(DesignSystem.Animation.cardSwipe) {
+        // Velocity affects animation speed (faster swipe = faster exit)
+        let baseDuration: Double = 0.35
+        let velocityFactor = min(abs(velocity) / 1500, 1.0)
+        let duration = baseDuration - (velocityFactor * 0.2)
+
+        // Reset drag progress immediately
+        onDragProgress?(0)
+
+        withAnimation(.spring(response: duration, dampingFraction: 0.8)) {
             offset = CGSize(width: offscreenX, height: 0)
-            rotation = direction == .right ? 15 : -15
+            rotation = exitRotation
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             offset = .zero
             rotation = 0
 
@@ -252,7 +272,8 @@ struct CardView: View {
         isTopCard: true,
         onSwipeRight: {},
         onSwipeLeft: {},
-        onUnlockTap: {}
+        onUnlockTap: {},
+        onDragProgress: nil
     )
     .padding()
     .background(DesignSystem.Colors.background)
