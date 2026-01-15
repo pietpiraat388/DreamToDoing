@@ -1,0 +1,452 @@
+[
+  {
+    "title": "Check Flight Prices",
+    "description": "Open Google Flights and look up your dream destination. No commitment, just possibilities. Your next adventure is closer than you think, Queen.",
+    "category": "adventure",
+    "iconName": "airplane.departure",
+    "isPremium": false,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Vision Board Moment",
+    "description": "Save one stunning travel photo to your camera roll. Let it remind you what you're building toward. Dream big, Boss.",
+    "category": "adventure",
+    "iconName": "photo.on.rectangle",
+    "isPremium": false,
+    "durationMinutes": 2,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Passport Check",
+    "description": "Check your passport expiry date. Nothing kills spontaneous travel faster than an expired passport. Stay ready so you don't have to get ready.",
+    "category": "adventure",
+    "iconName": "creditcard.fill",
+    "isPremium": false,
+    "durationMinutes": 2,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Pack Light Practice",
+    "description": "Pick 5 items you'd bring on a weekend trip. Learning to travel light is a superpower. Less stuff, more freedom.",
+    "category": "adventure",
+    "iconName": "bag.fill",
+    "isPremium": false,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Local Tourist",
+    "description": "Search for a hidden gem in your own city you've never visited. Adventure doesn't always require a plane ticket, Queen.",
+    "category": "adventure",
+    "iconName": "mappin.and.ellipse",
+    "isPremium": false,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Learn 'Hello'",
+    "description": "Look up how to say 'Hello' in a language you've never spoken. Future you will thank present you when you're actually there.",
+    "category": "adventure",
+    "iconName": "character.bubble",
+    "isPremium": true,
+    "durationMinutes": 3,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Plan Your Escape",
+    "description": "Research one destination you've been dreaming about. Hotels, activities, vibes. Your future self is already there waiting.",
+    "category": "adventure",
+    "iconName": "map.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Solo Date Night",
+    "description": "Book a table for one at a restaurant you've been wanting to try. Taking yourself out is the ultimate main character move.",
+    "category": "adventure",
+    "iconName": "fork.knife",
+    "isPremium": true,
+    "durationMinutes": 5,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Bucket List Brain Dump",
+    "description": "Write down 10 places you want to visit before you die. No filter, no budget limits. Dream wildly, Boss.",
+    "category": "adventure",
+    "iconName": "list.bullet.clipboard",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Travel Fund Start",
+    "description": "Set up a dedicated savings account or folder for travel. Name it something inspiring. Your adventure fund starts now.",
+    "category": "adventure",
+    "iconName": "banknote.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Culture Deep Dive",
+    "description": "Learn one custom or tradition from a country you want to visit. Understanding cultures makes travel richer, Queen.",
+    "category": "adventure",
+    "iconName": "globe.americas.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Adventure Buddy",
+    "description": "Message a friend about a trip idea. Sometimes all it takes is planting the seed. Your travel partner might be one text away.",
+    "category": "adventure",
+    "iconName": "person.2.fill",
+    "isPremium": true,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "First Class Daydream",
+    "description": "Price out a business class ticket to your dream destination. Just to dream. You're manifesting luxury, Boss.",
+    "category": "adventure",
+    "iconName": "airplane.circle.fill",
+    "isPremium": true,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Celebrate Your Win",
+    "description": "Write down one professional win from this week. Big or small, you earned it. Queens acknowledge their victories.",
+    "category": "career",
+    "iconName": "trophy.fill",
+    "isPremium": false,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Unsubscribe Queen",
+    "description": "Find one temptation email (sales, deals, 'limited offers') and unsubscribe. Protect your peace and your wallet.",
+    "category": "career",
+    "iconName": "envelope.badge.shield.half.filled",
+    "isPremium": false,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Inbox Zero Sprint",
+    "description": "Archive or delete 10 emails right now. A clean inbox is a clean mind. You're clearing space for what matters.",
+    "category": "career",
+    "iconName": "tray.fill",
+    "isPremium": false,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "LinkedIn Lurk",
+    "description": "Check out one profile of someone you admire professionally. Study their path. Your roadmap is out there, Boss.",
+    "category": "career",
+    "iconName": "person.crop.circle.badge.checkmark",
+    "isPremium": false,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Skills Inventory",
+    "description": "List 3 things you're genuinely great at. Not humble, not bragging—just facts. Know your worth, Queen.",
+    "category": "career",
+    "iconName": "star.circle.fill",
+    "isPremium": false,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Negotiate Practice",
+    "description": "Practice saying 'I'd like to discuss my compensation' out loud. Three times. The six-figure salary starts with your voice, Boss.",
+    "category": "career",
+    "iconName": "mic.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Network Power Move",
+    "description": "Message one professional connection you admire. A simple 'thinking of you' or share an article. Relationships build empires.",
+    "category": "career",
+    "iconName": "person.line.dotted.person.fill",
+    "isPremium": true,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Side Hustle Brainstorm",
+    "description": "Write down 3 ideas for making extra income doing something you enjoy. Multiple streams build wealth, Queen.",
+    "category": "career",
+    "iconName": "lightbulb.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Meeting Prep Boss",
+    "description": "Before your next meeting, write 3 talking points. Preparation is the difference between speaking and being heard.",
+    "category": "career",
+    "iconName": "doc.text.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Mentor Message",
+    "description": "Reach out to someone whose career you admire. Ask one thoughtful question. Mentorship starts with a message, Boss.",
+    "category": "career",
+    "iconName": "message.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "challenging"
+  },
+  {
+    "title": "Portfolio Polish",
+    "description": "Update one project in your portfolio or resume. Keep your wins fresh and documented. You're always interview-ready.",
+    "category": "career",
+    "iconName": "folder.fill",
+    "isPremium": true,
+    "durationMinutes": 15,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Salary Research",
+    "description": "Look up the market rate for your role. Knowledge is power in negotiations. Know your number, Queen.",
+    "category": "career",
+    "iconName": "chart.bar.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Pitch Perfect",
+    "description": "Practice your elevator pitch: who you are, what you do, what makes you unique. 30 seconds, confident delivery. Go.",
+    "category": "career",
+    "iconName": "person.wave.2.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Main Character Energy",
+    "description": "Walk into the next room like you own it. Shoulders back, chin up, slow down. You're not rushing—you're arriving.",
+    "category": "mindset",
+    "iconName": "star.fill",
+    "isPremium": false,
+    "durationMinutes": 2,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Dress for You",
+    "description": "Put on your favorite outfit right now. Not for a meeting, not for a date—just because you deserve to feel amazing today.",
+    "category": "mindset",
+    "iconName": "tshirt.fill",
+    "isPremium": false,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Mirror Hype",
+    "description": "Look in the mirror and give yourself three genuine compliments. Out loud. You're building the confidence others wish they had.",
+    "category": "mindset",
+    "iconName": "face.smiling.fill",
+    "isPremium": false,
+    "durationMinutes": 3,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Gratitude Moment",
+    "description": "Name three good things in your life right now. Big or small. Gratitude rewires your brain for abundance, Queen.",
+    "category": "mindset",
+    "iconName": "heart.fill",
+    "isPremium": false,
+    "durationMinutes": 3,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Deep Breath Reset",
+    "description": "Take 5 slow, deep breaths right now. In through the nose, out through the mouth. Your nervous system will thank you.",
+    "category": "mindset",
+    "iconName": "wind",
+    "isPremium": false,
+    "durationMinutes": 2,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Say No",
+    "description": "Decline one thing you don't actually want to do. 'No' is a complete sentence. Your time is your most valuable currency, Queen.",
+    "category": "mindset",
+    "iconName": "hand.raised.fill",
+    "isPremium": true,
+    "durationMinutes": 2,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Boundaries Boss",
+    "description": "Set one boundary today. It could be 'I'm not checking emails after 7pm' or 'I'm taking my full lunch break.' Protect your energy.",
+    "category": "mindset",
+    "iconName": "shield.fill",
+    "isPremium": true,
+    "durationMinutes": 5,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Fear Inventory",
+    "description": "Name one fear that's holding you back. Write it down. Naming it takes away its power. You're braver than you know.",
+    "category": "mindset",
+    "iconName": "bolt.fill",
+    "isPremium": true,
+    "durationMinutes": 5,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Future Self Letter",
+    "description": "Write a short note to yourself 5 years from now. What do you hope to tell her? Your future is being written today.",
+    "category": "mindset",
+    "iconName": "envelope.open.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Affirmation Record",
+    "description": "Record a voice memo listing your strengths and what you're proud of. Play it back when you need a boost, Boss.",
+    "category": "mindset",
+    "iconName": "waveform.circle.fill",
+    "isPremium": true,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Comparison Detox",
+    "description": "Unfollow or mute one account that makes you feel 'less than.' Curate your feed like you curate your life, Queen.",
+    "category": "mindset",
+    "iconName": "person.badge.minus",
+    "isPremium": true,
+    "durationMinutes": 3,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Comfort Zone Push",
+    "description": "Do one small thing that scares you today. Send that email. Make that call. Growth lives outside comfort, Boss.",
+    "category": "mindset",
+    "iconName": "figure.walk.motion",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "challenging"
+  },
+  {
+    "title": "Face Your Finances",
+    "description": "Open your bank app and look at your balance. No fear, no judgment. Financial freedom starts with awareness, Boss.",
+    "category": "finance",
+    "iconName": "dollarsign.circle.fill",
+    "isPremium": false,
+    "durationMinutes": 3,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Subscription Audit",
+    "description": "List all your recurring subscriptions. Netflix, Spotify, that gym membership. Knowledge is the first step to control.",
+    "category": "finance",
+    "iconName": "list.bullet.rectangle.fill",
+    "isPremium": false,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Spare Change Save",
+    "description": "Transfer $5 to your savings right now. Small moves compound into wealth. Start the habit today, Queen.",
+    "category": "finance",
+    "iconName": "arrow.right.circle.fill",
+    "isPremium": false,
+    "durationMinutes": 2,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Bill Check",
+    "description": "Review one upcoming bill or payment. No surprises, no stress. Financially aware women are financially free.",
+    "category": "finance",
+    "iconName": "doc.text.magnifyingglass",
+    "isPremium": false,
+    "durationMinutes": 3,
+    "difficulty": "easy"
+  },
+  {
+    "title": "No-Spend Hour",
+    "description": "Commit to no shopping or online browsing for the next hour. Practice intentional spending. Your wallet will thank you.",
+    "category": "finance",
+    "iconName": "cart.badge.minus",
+    "isPremium": false,
+    "durationMinutes": 2,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Net Worth Snapshot",
+    "description": "Calculate your total net worth: assets minus debts. This number isn't judgment—it's your starting line, Boss.",
+    "category": "finance",
+    "iconName": "chart.pie.fill",
+    "isPremium": true,
+    "durationMinutes": 15,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Investment 101",
+    "description": "Research one investment type: index funds, bonds, REITs. Financial literacy is freedom. Start learning today, Queen.",
+    "category": "finance",
+    "iconName": "chart.line.uptrend.xyaxis",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Emergency Fund Check",
+    "description": "Do you have 3 months of expenses saved? Check where you are and set a goal. Security is self-care.",
+    "category": "finance",
+    "iconName": "lifepreserver.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Debt Payoff Plan",
+    "description": "List your debts from smallest to largest. The snowball method works. Pick one to attack first, Boss.",
+    "category": "finance",
+    "iconName": "arrow.down.circle.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "medium"
+  },
+  {
+    "title": "Money Date",
+    "description": "Schedule a weekly 15-minute money review in your calendar. Consistency builds wealth. Date your finances, Queen.",
+    "category": "finance",
+    "iconName": "calendar.badge.clock",
+    "isPremium": true,
+    "durationMinutes": 5,
+    "difficulty": "easy"
+  },
+  {
+    "title": "Negotiate a Bill",
+    "description": "Call one service provider and ask for a better rate. The worst they can say is no. Fortune favors the bold, Boss.",
+    "category": "finance",
+    "iconName": "phone.fill",
+    "isPremium": true,
+    "durationMinutes": 15,
+    "difficulty": "challenging"
+  },
+  {
+    "title": "Retirement Peek",
+    "description": "Check your retirement account balance or research how to start one. Future you is counting on present you, Queen.",
+    "category": "finance",
+    "iconName": "clock.badge.checkmark.fill",
+    "isPremium": true,
+    "durationMinutes": 10,
+    "difficulty": "medium"
+  }
+]
