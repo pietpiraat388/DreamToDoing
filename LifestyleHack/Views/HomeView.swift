@@ -7,6 +7,11 @@ struct HomeView: View {
 
     @State private var viewModel: HomeViewModel
     @State private var showProfile = false
+    @State private var streakButtonFrame: CGRect = .zero
+    @State private var showFlyingFlame = false
+    @State private var flameOffset: CGSize = .zero
+    @State private var flameScale: CGFloat = 1.0
+    @State private var flameOpacity: Double = 1.0
 
     private let backgroundColor = DesignSystem.Colors.background
 
@@ -34,7 +39,10 @@ struct HomeView: View {
                         cards: viewModel.cardDeck,
                         currentIndex: viewModel.currentCardIndex,
                         isPremium: viewModel.isPremium,
-                        onSwipeRight: { viewModel.completeCard() },
+                        onSwipeRight: {
+                            triggerFlyingFlame()
+                            viewModel.completeCard()
+                        },
                         onSwipeLeft: { viewModel.skipCard() },
                         onUnlockTap: { viewModel.showPaywall = true }
                     )
@@ -50,6 +58,16 @@ struct HomeView: View {
             if viewModel.showConfetti {
                 ConfettiView()
                     .ignoresSafeArea()
+                    .allowsHitTesting(false)
+            }
+
+            if showFlyingFlame {
+                Image(systemName: "flame.fill")
+                    .font(.system(size: 24))
+                    .foregroundStyle(DesignSystem.Colors.terracotta)
+                    .scaleEffect(flameScale)
+                    .opacity(flameOpacity)
+                    .offset(flameOffset)
                     .allowsHitTesting(false)
             }
 
@@ -95,6 +113,17 @@ struct HomeView: View {
             } label: {
                 streakBadge
             }
+            .background(
+                GeometryReader { geo in
+                    Color.clear
+                        .onAppear {
+                            streakButtonFrame = geo.frame(in: .global)
+                        }
+                        .onChange(of: geo.frame(in: .global)) { _, newValue in
+                            streakButtonFrame = newValue
+                        }
+                }
+            )
         }
     }
 
@@ -151,6 +180,38 @@ struct HomeView: View {
                 .foregroundStyle(DesignSystem.Colors.secondaryText)
         }
         .frame(height: 420)
+    }
+
+    // MARK: - Flying Flame Animation
+
+    private func triggerFlyingFlame() {
+        // Reset to center
+        flameOffset = .zero
+        flameScale = 1.2
+        flameOpacity = 1.0
+        showFlyingFlame = true
+
+        // Calculate target offset from center to streak button
+        let screenCenter = CGPoint(
+            x: UIScreen.main.bounds.midX,
+            y: UIScreen.main.bounds.midY
+        )
+        let targetOffset = CGSize(
+            width: streakButtonFrame.midX - screenCenter.x,
+            height: streakButtonFrame.midY - screenCenter.y
+        )
+
+        // Animate to streak button
+        withAnimation(.easeInOut(duration: 0.6)) {
+            flameOffset = targetOffset
+            flameScale = 0.5
+            flameOpacity = 0.3
+        }
+
+        // Hide after animation
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            showFlyingFlame = false
+        }
     }
 }
 
