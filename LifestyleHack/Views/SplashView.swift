@@ -18,6 +18,11 @@ struct SplashView: View {
                 .ignoresSafeArea()
 
             VStack(spacing: DesignSystem.Spacing.sm) {
+                Image("SplashIconDream")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
+
                 Text("Go from dreaming...")
                     .font(DesignSystem.Typography.header(28))
                     .foregroundStyle(DesignSystem.Colors.primaryText)

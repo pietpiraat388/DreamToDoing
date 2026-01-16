@@ -15,27 +15,22 @@ struct EmptyStateView: View {
             backgroundColor
                 .ignoresSafeArea()
 
-            VStack(spacing: DesignSystem.Spacing.lg) {
-                // Checkmark celebration
-                ZStack {
-                    Circle()
-                        .fill(DesignSystem.Colors.sageGreen.opacity(0.15))
-                        .frame(width: 120, height: 120)
-
-                    Image(systemName: "checkmark.circle.fill")
-                        .font(.system(size: 80))
-                        .foregroundStyle(DesignSystem.Colors.sageGreen)
-                        .scaleEffect(showCheckmark ? 1 : 0.5)
-                        .opacity(showCheckmark ? 1 : 0)
-                }
+            VStack(spacing: DesignSystem.Spacing.sm) {
+                // App logo
+                Image("SplashIconDream")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 120, height: 120)
+                    .scaleEffect(showCheckmark ? 1 : 0.5)
+                    .opacity(showCheckmark ? 1 : 0)
 
                 VStack(spacing: DesignSystem.Spacing.sm) {
                     Text("You went from dreaming")
-                        .font(DesignSystem.Typography.header(24))
+                        .font(DesignSystem.Typography.header(28))
                         .foregroundStyle(DesignSystem.Colors.primaryText)
 
                     Text("to doing today.")
-                        .font(.system(size: 28, weight: .bold, design: .serif))
+                        .font(.system(size: 32, weight: .bold, design: .serif))
                         .foregroundStyle(DesignSystem.Colors.terracotta)
                 }
                 .multilineTextAlignment(.center)
@@ -50,6 +45,7 @@ struct EmptyStateView: View {
                         .font(DesignSystem.Typography.body(14))
                         .foregroundStyle(DesignSystem.Colors.secondaryText)
                 }
+                .padding(.top, DesignSystem.Spacing.md)
                 .opacity(showContent ? 1 : 0)
             }
             .padding(.horizontal, DesignSystem.Spacing.xl)
