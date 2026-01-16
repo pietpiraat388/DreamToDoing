@@ -14,11 +14,15 @@ import RevenueCat
 @main
 struct LifestyleHackApp: App {
 
+    @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @State private var contentManager = ContentManager()
     @State private var subscriptionManager = SubscriptionManager()
-    @State private var showSplash = true
+    @State private var showSplash: Bool
 
     init() {
+        // Show splash only for returning users (who completed onboarding)
+        _showSplash = State(initialValue: UserDefaults.standard.bool(forKey: "hasSeenOnboarding"))
+
         // Configure RevenueCat
         Purchases.logLevel = RevenueCatConfig.enableDebugLogs ? .debug : .info
         Purchases.configure(withAPIKey: RevenueCatConfig.apiKey)
@@ -33,10 +37,14 @@ struct LifestyleHackApp: App {
     var body: some Scene {
         WindowGroup {
             ZStack {
-                HomeView(
-                    contentManager: contentManager,
-                    subscriptionManager: subscriptionManager
-                )
+                if hasSeenOnboarding {
+                    HomeView(
+                        contentManager: contentManager,
+                        subscriptionManager: subscriptionManager
+                    )
+                } else {
+                    OnboardingView()
+                }
 
                 if showSplash {
                     SplashView {
