@@ -35,9 +35,9 @@ struct HomeView: View {
 
                 Spacer(minLength: 40)
 
-                if viewModel.cardDeck.isEmpty {
+                if viewModel.cardDeck.isEmpty && !viewModel.hasInitiallyLoaded {
                     loadingView
-                } else {
+                } else if !viewModel.cardDeck.isEmpty {
                     DeckView(
                         cards: viewModel.cardDeck,
                         currentIndex: viewModel.currentCardIndex,

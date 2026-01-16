@@ -83,6 +83,7 @@ final class HomeViewModel {
     var showConfetti: Bool = false
     var showPaywall: Bool = false
     var showEmptyState: Bool = false
+    var hasInitiallyLoaded: Bool = false
 
     // MARK: - Computed Properties
 
@@ -120,6 +121,7 @@ final class HomeViewModel {
         // Premium users get full shuffled deck
         cardDeck = contentManager.getSessionDeck(isPremium: isPremium, limit: 5)
         currentCardIndex = 0
+        hasInitiallyLoaded = true
     }
 
     func reshuffleDeck() {
@@ -185,12 +187,16 @@ final class HomeViewModel {
     }
 
     private func advanceToNextCard() {
-        withAnimation(DesignSystem.Animation.cardSwipe) {
-            currentCardIndex += 1
-        }
+        let nextIndex = currentCardIndex + 1
 
-        if currentCardIndex >= cardDeck.count {
+        // Check if we need to reshuffle BEFORE incrementing to prevent empty state
+        if nextIndex >= cardDeck.count {
             reshuffleDeck()
+            // currentCardIndex is already reset to 0 by reshuffleDeck()
+        } else {
+            withAnimation(DesignSystem.Animation.cardSwipe) {
+                currentCardIndex = nextIndex
+            }
         }
     }
 

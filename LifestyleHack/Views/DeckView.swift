@@ -76,8 +76,12 @@ struct DeckView: View {
 
     private var visibleCardIndices: [Int] {
         guard !cards.isEmpty else { return [] }
-        let start = currentIndex
-        let end = min(currentIndex + visibleCards, cards.count)
+
+        // Clamp currentIndex to valid range to prevent empty state during reshuffle
+        let safeIndex = min(currentIndex, max(0, cards.count - 1))
+        let start = safeIndex
+        let end = min(safeIndex + visibleCards, cards.count)
+
         guard start < end else { return [] }
         return Array(start..<end).reversed()
     }
