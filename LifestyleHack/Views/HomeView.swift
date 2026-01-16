@@ -13,6 +13,7 @@ struct HomeView: View {
     @State private var flameScale: CGFloat = 1.0
     @State private var flameOpacity: Double = 1.0
     @State private var streakButtonScale: CGFloat = 1.0
+    @State private var streakButtonGlow: Bool = false
 
     private let backgroundColor = DesignSystem.Colors.background
 
@@ -115,6 +116,10 @@ struct HomeView: View {
                 streakBadge
             }
             .scaleEffect(streakButtonScale)
+            .shadow(
+                color: streakButtonGlow ? DesignSystem.Colors.terracotta.opacity(0.6) : .clear,
+                radius: streakButtonGlow ? 12 : 0
+            )
             .background(
                 GeometryReader { geo in
                     Color.clear
@@ -210,18 +215,22 @@ struct HomeView: View {
             flameOpacity = 0.3
         }
 
-        // Hide after animation + pulse the button
+        // Hide after animation + pulse the button with glow
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             showFlyingFlame = false
 
-            // Pulse the streak button
+            // Pulse the streak button with glow
+            streakButtonGlow = true
             withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
-                streakButtonScale = 1.15
+                streakButtonScale = 1.25
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
                     streakButtonScale = 1.0
                 }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                streakButtonGlow = false
             }
         }
     }
