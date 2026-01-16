@@ -6,6 +6,7 @@ import SwiftUI
 struct ProfileView: View {
 
     @Environment(\.dismiss) private var dismiss
+    @State private var selectedWeekOffset: Int = 0
 
     let currentStreak: Int
     let longestStreak: Int
@@ -83,14 +84,65 @@ struct ProfileView: View {
 
     // MARK: - Weekly Capsule
 
+    private var availableWeeks: [Int] {
+        Array((0..<8).reversed())
+    }
+
+    private func weekDays(for weekOffset: Int) -> [Date] {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let weekday = calendar.component(.weekday, from: today)
+        let daysSinceMonday = (weekday + 5) % 7
+
+        guard let thisMonday = calendar.date(byAdding: .day, value: -daysSinceMonday, to: today),
+              let targetMonday = calendar.date(byAdding: .weekOfYear, value: -weekOffset, to: thisMonday) else {
+            return []
+        }
+
+        return (0..<7).compactMap { offset in
+            calendar.date(byAdding: .day, value: offset, to: targetMonday)
+        }
+    }
+
+    private func weekTitle(for weekOffset: Int) -> String {
+        switch weekOffset {
+        case 0: return "This Week"
+        case 1: return "Last Week"
+        default: return "\(weekOffset) Weeks Ago"
+        }
+    }
+
     private var weeklyCapsule: some View {
+        TabView(selection: $selectedWeekOffset) {
+            ForEach(availableWeeks, id: \.self) { weekOffset in
+                weekView(for: weekOffset)
+                    .tag(weekOffset)
+            }
+        }
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .frame(height: 120)
+    }
+
+    private func weekView(for weekOffset: Int) -> some View {
         VStack(spacing: DesignSystem.Spacing.sm) {
-            Text("This Week")
-                .font(DesignSystem.Typography.bodySemibold(14))
-                .foregroundStyle(DesignSystem.Colors.primaryText)
+            HStack(spacing: DesignSystem.Spacing.sm) {
+                // Left arrow: visible when can swipe right to older weeks
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(weekOffset < 7 ? DesignSystem.Colors.secondaryText : .clear)
+
+                Text(weekTitle(for: weekOffset))
+                    .font(DesignSystem.Typography.bodySemibold(14))
+                    .foregroundStyle(DesignSystem.Colors.primaryText)
+
+                // Right arrow: visible when can swipe left to newer weeks
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(weekOffset > 0 ? DesignSystem.Colors.secondaryText : .clear)
+            }
 
             HStack(spacing: 0) {
-                ForEach(last7Days, id: \.self) { day in
+                ForEach(weekDays(for: weekOffset), id: \.self) { day in
                     dayCircle(for: day)
                         .frame(maxWidth: .infinity)
                 }
@@ -102,21 +154,6 @@ struct ProfileView: View {
                 RoundedRectangle(cornerRadius: 20)
                     .fill(DesignSystem.Colors.terracotta.opacity(0.15))
             )
-        }
-    }
-
-    private var last7Days: [Date] {
-        let calendar = Calendar.current
-        let today = calendar.startOfDay(for: Date())
-        let weekday = calendar.component(.weekday, from: today)
-        let daysSinceMonday = (weekday + 5) % 7
-
-        guard let monday = calendar.date(byAdding: .day, value: -daysSinceMonday, to: today) else {
-            return []
-        }
-
-        return (0..<7).compactMap { offset in
-            calendar.date(byAdding: .day, value: offset, to: monday)
         }
     }
 
