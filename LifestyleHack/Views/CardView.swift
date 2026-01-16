@@ -2,6 +2,7 @@
 // See LICENSE file for details
 
 import SwiftUI
+import Combine
 
 struct CardView: View {
 
@@ -16,10 +17,54 @@ struct CardView: View {
     @State private var offset: CGSize = .zero
     @State private var rotation: Double = 0
 
+    // Flip & Timer State
+    @State private var isFlipped = false
+    @State private var timeRemaining: Int = 0
+    @State private var timerActive = false
+    @State private var timerFinished = false
+    @State private var pulseOpacity: Double = 1.0
+
     private let swipeThreshold: CGFloat = 100
     private let cardCornerRadius = DesignSystem.Card.cornerRadius
 
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
     var body: some View {
+        ZStack {
+            // Back of card (timer view) - visible when flipped
+            backView
+                .opacity(isFlipped ? 1 : 0)
+                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+
+            // Front of card - visible when not flipped
+            frontView
+                .opacity(isFlipped ? 0 : 1)
+        }
+        .rotation3DEffect(.degrees(isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
+        .offset(offset)
+        .rotationEffect(.degrees(rotation), anchor: .bottom)
+        .onTapGesture {
+            if !showPremiumBadge && !isFlipped && isTopCard {
+                startFocusMode()
+            }
+        }
+        .gesture(isFlipped ? nil : cardGesture)
+        .animation(DesignSystem.Animation.cardSwipe, value: offset)
+        .animation(.spring(response: 0.6, dampingFraction: 0.8), value: isFlipped)
+        .onReceive(timer) { _ in
+            guard timerActive && timeRemaining > 0 else { return }
+            timeRemaining -= 1
+            if timeRemaining == 0 {
+                timerFinished = true
+                timerActive = false
+            }
+        }
+        .sensoryFeedback(.success, trigger: timerFinished)
+    }
+
+    // MARK: - Front View
+
+    private var frontView: some View {
         ZStack(alignment: .topTrailing) {
             cardContent
                 .saturation(showPremiumBadge ? 0.6 : 1.0)
@@ -33,10 +78,106 @@ struct CardView: View {
                 swipeOverlay
             }
         }
-        .offset(offset)
-        .rotationEffect(.degrees(rotation), anchor: .bottom)
-        .gesture(cardGesture)
-        .animation(DesignSystem.Animation.cardSwipe, value: offset)
+    }
+
+    // MARK: - Back View (Focus Mode)
+
+    private var backView: some View {
+        VStack(spacing: DesignSystem.Spacing.md) {
+            // Task title (small)
+            Text(card.title)
+                .font(DesignSystem.Typography.bodySemibold(16))
+                .foregroundStyle(DesignSystem.Colors.secondaryText)
+                .multilineTextAlignment(.center)
+                .padding(.top, DesignSystem.Spacing.xl)
+                .padding(.horizontal, DesignSystem.Spacing.md)
+
+            Spacer()
+
+            // Large countdown timer
+            Text(formatTime(timeRemaining))
+                .font(DesignSystem.Typography.header(72))
+                .foregroundStyle(DesignSystem.Colors.primaryText)
+                .monospacedDigit()
+                .contentTransition(.numericText())
+
+            // Pulsing "Focus time..." text
+            Text(timerFinished ? "Time's up!" : "Focus time...")
+                .font(DesignSystem.Typography.body(16))
+                .foregroundStyle(DesignSystem.Colors.terracotta)
+                .opacity(pulseOpacity)
+                .onAppear {
+                    withAnimation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true)) {
+                        pulseOpacity = 0.4
+                    }
+                }
+
+            Spacer()
+
+            // "I Did It!" button
+            Button(action: completeFocusMode) {
+                Text(timerFinished ? "Time's Up! Mark Done" : "I Did It!")
+                    .font(DesignSystem.Typography.bodySemibold(18))
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, DesignSystem.Spacing.md)
+                    .background(
+                        RoundedRectangle(cornerRadius: 14)
+                            .fill(DesignSystem.Colors.sageGreen)
+                    )
+            }
+            .padding(.horizontal, DesignSystem.Spacing.lg)
+
+            // Cancel button
+            Button("Cancel") {
+                cancelFocusMode()
+            }
+            .font(DesignSystem.Typography.body(14))
+            .foregroundStyle(DesignSystem.Colors.secondaryText)
+            .padding(.bottom, DesignSystem.Spacing.lg)
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 400)
+        .background(
+            RoundedRectangle(cornerRadius: cardCornerRadius)
+                .fill(DesignSystem.Colors.cardBackground)
+                .shadow(
+                    color: .black.opacity(DesignSystem.Card.shadowOpacity),
+                    radius: DesignSystem.Card.shadowRadius,
+                    y: DesignSystem.Card.shadowY
+                )
+        )
+    }
+
+    // MARK: - Focus Mode Functions
+
+    private func startFocusMode() {
+        timeRemaining = card.durationMinutes * 60
+        timerActive = true
+        timerFinished = false
+        pulseOpacity = 1.0
+        isFlipped = true
+    }
+
+    private func completeFocusMode() {
+        timerActive = false
+        isFlipped = false
+
+        // Small delay to let flip animation complete
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            onSwipeRight()
+        }
+    }
+
+    private func cancelFocusMode() {
+        timerActive = false
+        isFlipped = false
+    }
+
+    private func formatTime(_ seconds: Int) -> String {
+        let mins = seconds / 60
+        let secs = seconds % 60
+        return String(format: "%02d:%02d", mins, secs)
     }
 
     // MARK: - Card Content
@@ -264,11 +405,11 @@ struct CardView: View {
             description: "Walk into the next room like you own it. Shoulders back, chin up, slow down.",
             category: .mindset,
             iconName: "star.fill",
-            isPremium: true,
+            isPremium: false,
             durationMinutes: 2,
             difficulty: .easy
         ),
-        showPremiumBadge: true,
+        showPremiumBadge: false,
         isTopCard: true,
         onSwipeRight: {},
         onSwipeLeft: {},

@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CD32566C2F1A5026000C1AC1 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = CD32566B2F1A5026000C1AC1 /* RevenueCat */; };
+		CD32566E2F1A5026000C1AC1 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = CD32566D2F1A5026000C1AC1 /* RevenueCatUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		CD3255CF2F1957FD000C1AC1 /* LifestyleHack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifestyleHack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -16,6 +21,11 @@
 			path = LifestyleHack;
 			sourceTree = "<group>";
 		};
+		CD3256692F1A5001000C1AC1 /* Subscription */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Subscription;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,6 +33,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD32566E2F1A5026000C1AC1 /* RevenueCatUI in Frameworks */,
+				CD32566C2F1A5026000C1AC1 /* RevenueCat in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,6 +44,7 @@
 		CD3255C62F1957FD000C1AC1 = {
 			isa = PBXGroup;
 			children = (
+				CD3256692F1A5001000C1AC1 /* Subscription */,
 				CD3255D12F1957FD000C1AC1 /* LifestyleHack */,
 				CD3255D02F1957FD000C1AC1 /* Products */,
 			);
@@ -62,9 +75,12 @@
 			);
 			fileSystemSynchronizedGroups = (
 				CD3255D12F1957FD000C1AC1 /* LifestyleHack */,
+				CD3256692F1A5001000C1AC1 /* Subscription */,
 			);
 			name = LifestyleHack;
 			packageProductDependencies = (
+				CD32566B2F1A5026000C1AC1 /* RevenueCat */,
+				CD32566D2F1A5026000C1AC1 /* RevenueCatUI */,
 			);
 			productName = LifestyleHack;
 			productReference = CD3255CF2F1957FD000C1AC1 /* LifestyleHack.app */;
@@ -94,6 +110,9 @@
 			);
 			mainGroup = CD3255C62F1957FD000C1AC1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				CD32566A2F1A5026000C1AC1 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = CD3255D02F1957FD000C1AC1 /* Products */;
 			projectDirPath = "";
@@ -256,17 +275,18 @@
 				DEVELOPMENT_TEAM = WB6954Y96D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.parivee.LifestyleHack;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.parivee.dreamtodoing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -292,17 +312,18 @@
 				DEVELOPMENT_TEAM = WB6954Y96D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.parivee.LifestyleHack;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.parivee.dreamtodoing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -340,6 +361,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CD32566A2F1A5026000C1AC1 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.55.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CD32566B2F1A5026000C1AC1 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD32566A2F1A5026000C1AC1 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
+		CD32566D2F1A5026000C1AC1 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CD32566A2F1A5026000C1AC1 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CD3255C72F1957FD000C1AC1 /* Project object */;
 }
