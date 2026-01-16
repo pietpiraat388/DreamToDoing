@@ -17,10 +17,23 @@ final class HomeViewModel {
     var cardDeck: [ActionCard] = []
     var currentCardIndex: Int = 0
 
-    // MARK: - Daily Progress
+    // MARK: - Daily Progress (AppStorage backed)
 
-    var completedTodayCount: Int = 0
-    var skippedTodayCount: Int = 0
+    @ObservationIgnored
+    @AppStorage("completedTodayCount") private var _completedTodayCount: Int = 0
+
+    @ObservationIgnored
+    @AppStorage("skippedTodayCount") private var _skippedTodayCount: Int = 0
+
+    var completedTodayCount: Int {
+        get { _completedTodayCount }
+        set { _completedTodayCount = newValue }
+    }
+
+    var skippedTodayCount: Int {
+        get { _skippedTodayCount }
+        set { _skippedTodayCount = newValue }
+    }
 
     // MARK: - Streak (AppStorage backed)
 

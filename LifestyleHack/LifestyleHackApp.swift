@@ -9,6 +9,7 @@
 //
 
 import SwiftUI
+import RevenueCat
 
 @main
 struct LifestyleHackApp: App {
@@ -16,6 +17,18 @@ struct LifestyleHackApp: App {
     @State private var contentManager = ContentManager()
     @State private var subscriptionManager = SubscriptionManager()
     @State private var showSplash = true
+
+    init() {
+        // Configure RevenueCat
+        Purchases.logLevel = RevenueCatConfig.enableDebugLogs ? .debug : .info
+        Purchases.configure(withAPIKey: RevenueCatConfig.apiKey)
+        Purchases.shared.delegate = RevenueCatService.shared
+
+        // Initial subscription check
+        Task {
+            await RevenueCatService.shared.performInitialSetup()
+        }
+    }
 
     var body: some Scene {
         WindowGroup {

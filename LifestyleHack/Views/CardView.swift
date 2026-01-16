@@ -8,6 +8,7 @@ struct CardView: View {
 
     let card: ActionCard
     let showPremiumBadge: Bool
+    let isPremiumUser: Bool
     let isTopCard: Bool
     let onSwipeRight: () -> Void
     let onSwipeLeft: () -> Void
@@ -45,7 +46,12 @@ struct CardView: View {
         .rotationEffect(.degrees(rotation), anchor: .bottom)
         .onTapGesture {
             if !showPremiumBadge && !isFlipped && isTopCard {
-                startFocusMode()
+                if isPremiumUser {
+                    startFocusMode()
+                } else {
+                    // Non-premium user tapped - show paywall
+                    onUnlockTap()
+                }
             }
         }
         .gesture(isFlipped ? nil : cardGesture)
@@ -211,9 +217,17 @@ struct CardView: View {
             Spacer()
 
             HStack(spacing: DesignSystem.Spacing.lg) {
-                Label("\(card.durationMinutes) min", systemImage: "clock")
-                    .font(DesignSystem.Typography.body(14))
-                    .foregroundStyle(DesignSystem.Colors.secondaryText)
+                // Timer indicator with premium lock for non-premium users
+                HStack(spacing: DesignSystem.Spacing.xs) {
+                    if !isPremiumUser && !showPremiumBadge {
+                        Image(systemName: "lock.fill")
+                            .font(.system(size: 10))
+                            .foregroundStyle(DesignSystem.Colors.terracotta)
+                    }
+                    Label("\(card.durationMinutes) min", systemImage: "clock")
+                        .font(DesignSystem.Typography.body(14))
+                        .foregroundStyle(DesignSystem.Colors.secondaryText)
+                }
 
                 Label(card.difficulty.rawValue.capitalized, systemImage: "chart.bar.fill")
                     .font(DesignSystem.Typography.body(14))
@@ -410,6 +424,7 @@ struct CardView: View {
             difficulty: .easy
         ),
         showPremiumBadge: false,
+        isPremiumUser: false,
         isTopCard: true,
         onSwipeRight: {},
         onSwipeLeft: {},

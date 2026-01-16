@@ -24,6 +24,7 @@ struct DeckView: View {
                 CardView(
                     card: cards[index],
                     showPremiumBadge: !isPremium && cards[index].isPremium,
+                    isPremiumUser: isPremium,
                     isTopCard: offset == 0,
                     onSwipeRight: onSwipeRight,
                     onSwipeLeft: onSwipeLeft,

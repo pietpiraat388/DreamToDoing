@@ -14,6 +14,7 @@ struct HomeView: View {
     @State private var flameOpacity: Double = 1.0
     @State private var streakButtonScale: CGFloat = 1.0
     @State private var streakButtonGlow: Bool = false
+    @State private var viewCenter: CGPoint = .zero
 
     private let backgroundColor = DesignSystem.Colors.background
 
@@ -78,9 +79,20 @@ struct HomeView: View {
                     .transition(.opacity)
             }
         }
+        .background(
+            GeometryReader { geo in
+                Color.clear
+                    .onAppear {
+                        viewCenter = CGPoint(x: geo.frame(in: .global).midX, y: geo.frame(in: .global).midY)
+                    }
+                    .onChange(of: geo.frame(in: .global)) { _, newValue in
+                        viewCenter = CGPoint(x: newValue.midX, y: newValue.midY)
+                    }
+            }
+        )
         .animation(DesignSystem.Animation.smooth, value: viewModel.showEmptyState)
-        .sheet(isPresented: $viewModel.showPaywall) {
-            PaywallView(onPurchase: viewModel.unlockPremium)
+        .fullScreenCover(isPresented: $viewModel.showPaywall) {
+            NativePaywallView()
         }
         .sheet(isPresented: $showProfile) {
             ProfileView(
@@ -199,13 +211,9 @@ struct HomeView: View {
         showFlyingFlame = true
 
         // Calculate target offset from center to streak button
-        let screenCenter = CGPoint(
-            x: UIScreen.main.bounds.midX,
-            y: UIScreen.main.bounds.midY
-        )
         let targetOffset = CGSize(
-            width: streakButtonFrame.midX - screenCenter.x,
-            height: streakButtonFrame.midY - screenCenter.y
+            width: streakButtonFrame.midX - viewCenter.x,
+            height: streakButtonFrame.midY - viewCenter.y
         )
 
         // Animate to streak button

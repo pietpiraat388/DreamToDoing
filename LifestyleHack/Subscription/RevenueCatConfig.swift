@@ -12,9 +12,9 @@ import Foundation
 struct RevenueCatConfig {
   
   // MARK: - API & App Settings
-  static let apiKey = "appl_fLWKewgGGRvuLDEGAJobdmuVEJH"
-  static let entitlement = "pro_access"
-  static let offering = "birthday_app_premium"
+  static let apiKey = "test_pmcoksPivFposLrukontHLdowhX"
+  static let entitlement = "Pro_Access"
+  static let offering = "Dreams_Pro"
   
   // MARK: - UserDefaults Keys
   static let subscriptionStatusKey = "hasActiveSubscription"

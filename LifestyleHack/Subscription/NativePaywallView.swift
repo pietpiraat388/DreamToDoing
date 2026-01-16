@@ -11,8 +11,8 @@ struct NativePaywallView: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        // Simpel PaywallView volgens docs
-        PaywallView()
+        // Simpel PaywallView volgens docs (fully qualified to avoid conflict with app's PaywallView)
+        RevenueCatUI.PaywallView()
             .onPurchaseCompleted { customerInfo in
                 print("✅ Purchase successful")
 

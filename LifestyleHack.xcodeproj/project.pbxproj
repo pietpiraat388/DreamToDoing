@@ -21,11 +21,6 @@
 			path = LifestyleHack;
 			sourceTree = "<group>";
 		};
-		CD3256692F1A5001000C1AC1 /* Subscription */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Subscription;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +39,6 @@
 		CD3255C62F1957FD000C1AC1 = {
 			isa = PBXGroup;
 			children = (
-				CD3256692F1A5001000C1AC1 /* Subscription */,
 				CD3255D12F1957FD000C1AC1 /* LifestyleHack */,
 				CD3255D02F1957FD000C1AC1 /* Products */,
 			);
@@ -75,7 +69,6 @@
 			);
 			fileSystemSynchronizedGroups = (
 				CD3255D12F1957FD000C1AC1 /* LifestyleHack */,
-				CD3256692F1A5001000C1AC1 /* Subscription */,
 			);
 			name = LifestyleHack;
 			packageProductDependencies = (
@@ -275,6 +268,7 @@
 				DEVELOPMENT_TEAM = WB6954Y96D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dream To Doing";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -312,6 +306,7 @@
 				DEVELOPMENT_TEAM = WB6954Y96D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dream To Doing";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
