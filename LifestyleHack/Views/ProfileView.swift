@@ -163,6 +163,32 @@ struct ProfileView: View {
 
     // MARK: - Stats Grid
 
+    private var groupedWins: [(date: Date, wins: [CompletedAction])] {
+        let calendar = Calendar.current
+        let grouped = Dictionary(grouping: historyManager.completedActions) { action in
+            calendar.startOfDay(for: action.dateCompleted)
+        }
+        return grouped.sorted { $0.key > $1.key }
+            .map { (date: $0.key, wins: $0.value.sorted { $0.dateCompleted > $1.dateCompleted }) }
+    }
+
+    private func sectionHeader(for date: Date) -> String {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) {
+            return "Today"
+        } else if calendar.isDateInYesterday(date) {
+            return "Yesterday"
+        } else if calendar.isDate(date, equalTo: Date(), toGranularity: .year) {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM d"
+            return formatter.string(from: date)
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM d, yyyy"
+            return formatter.string(from: date)
+        }
+    }
+
     private var statsGrid: some View {
         HStack(spacing: DesignSystem.Spacing.sm) {
             statItem(value: currentStreak, label: "Current", icon: "flame")
@@ -211,9 +237,29 @@ struct ProfileView: View {
             if historyManager.completedActions.isEmpty {
                 emptyStateView
             } else {
-                LazyVStack(spacing: DesignSystem.Spacing.sm) {
-                    ForEach(historyManager.completedActions.prefix(20)) { win in
-                        winCard(win)
+                LazyVStack(spacing: DesignSystem.Spacing.sm, pinnedViews: [.sectionHeaders]) {
+                    ForEach(groupedWins.prefix(7), id: \.date) { group in
+                        Section {
+                            ForEach(group.wins) { win in
+                                winCard(win)
+                            }
+                        } header: {
+                            HStack {
+                                Text(sectionHeader(for: group.date))
+                                    .font(DesignSystem.Typography.bodySemibold(14))
+                                    .foregroundStyle(DesignSystem.Colors.secondaryText)
+
+                                Spacer()
+
+                                Text("\(group.wins.count) \(group.wins.count == 1 ? "win" : "wins")")
+                                    .font(DesignSystem.Typography.body(12))
+                                    .foregroundStyle(DesignSystem.Colors.secondaryText.opacity(0.7))
+                            }
+                            .padding(.vertical, DesignSystem.Spacing.sm)
+                            .padding(.horizontal, DesignSystem.Spacing.md)
+                            .frame(maxWidth: .infinity)
+                            .background(backgroundColor)
+                        }
                     }
                 }
             }
