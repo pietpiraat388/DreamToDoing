@@ -64,7 +64,7 @@ struct CardView: View {
                 .font(DesignSystem.Typography.body(16))
                 .foregroundStyle(DesignSystem.Colors.secondaryText)
                 .multilineTextAlignment(.center)
-                .lineLimit(3)
+                .lineLimit(4)
                 .padding(.horizontal, DesignSystem.Spacing.lg)
 
             Spacer()
