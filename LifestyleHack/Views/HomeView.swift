@@ -12,6 +12,7 @@ struct HomeView: View {
     @State private var flameOffset: CGSize = .zero
     @State private var flameScale: CGFloat = 1.0
     @State private var flameOpacity: Double = 1.0
+    @State private var streakButtonScale: CGFloat = 1.0
 
     private let backgroundColor = DesignSystem.Colors.background
 
@@ -63,7 +64,7 @@ struct HomeView: View {
 
             if showFlyingFlame {
                 Image(systemName: "flame.fill")
-                    .font(.system(size: 24))
+                    .font(.system(size: 36))
                     .foregroundStyle(DesignSystem.Colors.terracotta)
                     .scaleEffect(flameScale)
                     .opacity(flameOpacity)
@@ -113,6 +114,7 @@ struct HomeView: View {
             } label: {
                 streakBadge
             }
+            .scaleEffect(streakButtonScale)
             .background(
                 GeometryReader { geo in
                     Color.clear
@@ -132,7 +134,7 @@ struct HomeView: View {
             Image(systemName: "flame.fill")
                 .foregroundStyle(DesignSystem.Colors.terracotta)
 
-            Text("\(viewModel.currentStreak)")
+            Text("\(viewModel.totalActionsCompleted)")
                 .font(DesignSystem.Typography.bodySemibold(18))
                 .foregroundStyle(DesignSystem.Colors.primaryText)
         }
@@ -208,9 +210,19 @@ struct HomeView: View {
             flameOpacity = 0.3
         }
 
-        // Hide after animation
+        // Hide after animation + pulse the button
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
             showFlyingFlame = false
+
+            // Pulse the streak button
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
+                streakButtonScale = 1.15
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                    streakButtonScale = 1.0
+                }
+            }
         }
     }
 }
