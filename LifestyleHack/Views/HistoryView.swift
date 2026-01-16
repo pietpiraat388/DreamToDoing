@@ -11,57 +11,30 @@ struct HistoryView: View {
     private let backgroundColor = DesignSystem.Colors.background
 
     var body: some View {
-        ZStack {
-            backgroundColor
-                .ignoresSafeArea()
-
-            VStack(spacing: 0) {
-                // Custom Header
-                headerView
-                    .padding(.horizontal, DesignSystem.Spacing.md)
-                    .padding(.top, DesignSystem.Spacing.md)
-                    .padding(.bottom, DesignSystem.Spacing.lg)
-
+        NavigationStack {
+            Group {
                 if historyManager.completedActions.isEmpty {
-                    Spacer()
                     emptyStateView
-                    Spacer()
                 } else {
                     historyList
                 }
             }
-        }
-    }
-
-    // MARK: - Header
-
-    private var headerView: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: DesignSystem.Spacing.xs) {
-                Text("My Wins")
-                    .font(DesignSystem.Typography.header(32))
-                    .foregroundStyle(DesignSystem.Colors.primaryText)
-
-                Text("\(historyManager.totalWins) total actions completed")
-                    .font(DesignSystem.Typography.body(14))
-                    .foregroundStyle(DesignSystem.Colors.secondaryText)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(backgroundColor)
+            .navigationTitle("My Wins")
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Done") {
+                        dismiss()
+                    }
+                    .fontWeight(.semibold)
+                }
             }
-
-            Spacer()
-
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundStyle(DesignSystem.Colors.secondaryText)
-                    .frame(width: 32, height: 32)
-                    .background(
-                        Circle()
-                            .fill(DesignSystem.Colors.cardBackground)
-                    )
-            }
+            .toolbarBackground(backgroundColor, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
         }
+        .presentationDragIndicator(.visible)
     }
 
     // MARK: - Empty State

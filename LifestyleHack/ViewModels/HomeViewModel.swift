@@ -30,9 +30,25 @@ final class HomeViewModel {
     @ObservationIgnored
     @AppStorage("lastCompletedDate") private var _lastCompletedDateString: String = ""
 
+    @ObservationIgnored
+    @AppStorage("longestStreak") private var _longestStreak: Int = 0
+
+    @ObservationIgnored
+    @AppStorage("totalActionsCompleted") private var _totalActionsCompleted: Int = 0
+
     var currentStreak: Int {
         get { _currentStreak }
         set { _currentStreak = newValue }
+    }
+
+    var longestStreak: Int {
+        get { _longestStreak }
+        set { _longestStreak = newValue }
+    }
+
+    var totalActionsCompleted: Int {
+        get { _totalActionsCompleted }
+        set { _totalActionsCompleted = newValue }
     }
 
     private var lastCompletedDate: Date? {
@@ -117,7 +133,13 @@ final class HomeViewModel {
         HistoryManager.shared.addWin(card: card)
 
         completedTodayCount += 1
+        totalActionsCompleted += 1
         updateStreak()
+
+        // Update longest streak if current exceeds it
+        if currentStreak > longestStreak {
+            longestStreak = currentStreak
+        }
 
         showConfetti = true
 

@@ -7,6 +7,7 @@ struct HomeView: View {
 
     @State private var viewModel: HomeViewModel
     @State private var showHistory = false
+    @State private var showStreak = false
 
     private let backgroundColor = DesignSystem.Colors.background
 
@@ -65,6 +66,14 @@ struct HomeView: View {
         .sheet(isPresented: $showHistory) {
             HistoryView()
         }
+        .sheet(isPresented: $showStreak) {
+            StreakView(
+                currentStreak: viewModel.currentStreak,
+                longestStreak: viewModel.longestStreak,
+                totalActions: viewModel.totalActionsCompleted
+            )
+            .presentationDetents([.medium])
+        }
         .sensoryFeedback(.success, trigger: viewModel.completedTodayCount)
     }
 
@@ -106,8 +115,12 @@ struct HomeView: View {
 
             Spacer()
 
-            // Streak Badge (Right)
-            streakBadge
+            // Streak Badge (Right) - Tappable
+            Button {
+                showStreak = true
+            } label: {
+                streakBadge
+            }
         }
     }
 
