@@ -3,7 +3,7 @@
 
 import SwiftUI
 
-struct StreakView: View {
+struct ProfileView: View {
 
     @Environment(\.dismiss) private var dismiss
 
@@ -20,7 +20,7 @@ struct StreakView: View {
                 VStack(spacing: DesignSystem.Spacing.lg) {
                     // Hero Flame
                     flameView
-                        .padding(.top, DesignSystem.Spacing.lg)
+                        .padding(.top, DesignSystem.Spacing.md)
 
                     // Weekly Capsule
                     weeklyCapsule
@@ -28,15 +28,15 @@ struct StreakView: View {
                     // Stats Grid
                     statsGrid
 
-                    // Motivational Quote
-                    quoteView
-                        .padding(.bottom, DesignSystem.Spacing.md)
+                    // Recent Wins Section
+                    recentWinsSection
                 }
                 .padding(.horizontal, DesignSystem.Spacing.md)
+                .padding(.bottom, DesignSystem.Spacing.xl)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(backgroundColor)
-            .navigationTitle("Your Streak")
+            .navigationTitle("Your Progress")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -52,7 +52,7 @@ struct StreakView: View {
         .presentationDragIndicator(.visible)
     }
 
-    // MARK: - Hero Flame (Compact)
+    // MARK: - Hero Flame
 
     private var flameView: some View {
         ZStack {
@@ -81,7 +81,7 @@ struct StreakView: View {
         }
     }
 
-    // MARK: - Weekly Capsule (Tinder Style)
+    // MARK: - Weekly Capsule
 
     private var weeklyCapsule: some View {
         VStack(spacing: DesignSystem.Spacing.sm) {
@@ -108,7 +108,6 @@ struct StreakView: View {
     private var last7Days: [Date] {
         let calendar = Calendar.current
         let today = calendar.startOfDay(for: Date())
-
         let weekday = calendar.component(.weekday, from: today)
         let daysSinceMonday = (weekday + 5) % 7
 
@@ -199,20 +198,107 @@ struct StreakView: View {
         )
     }
 
-    // MARK: - Quote
+    // MARK: - Recent Wins Section
 
-    private var quoteView: some View {
-        Text("Consistency is the bridge between dreams and doing.")
-            .font(DesignSystem.Typography.body(12))
-            .foregroundStyle(DesignSystem.Colors.secondaryText)
-            .italic()
-            .multilineTextAlignment(.center)
-            .padding(.horizontal, DesignSystem.Spacing.md)
+    private var recentWinsSection: some View {
+        VStack(alignment: .leading, spacing: DesignSystem.Spacing.md) {
+            // Section Header
+            Text("Recent Wins")
+                .font(DesignSystem.Typography.header(24))
+                .foregroundStyle(DesignSystem.Colors.primaryText)
+                .padding(.top, DesignSystem.Spacing.sm)
+
+            if historyManager.completedActions.isEmpty {
+                emptyStateView
+            } else {
+                LazyVStack(spacing: DesignSystem.Spacing.sm) {
+                    ForEach(historyManager.completedActions.prefix(20)) { win in
+                        winCard(win)
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Empty State
+
+    private var emptyStateView: some View {
+        VStack(spacing: DesignSystem.Spacing.md) {
+            Image(systemName: "trophy.fill")
+                .font(.system(size: 40))
+                .foregroundStyle(DesignSystem.Colors.terracotta.opacity(0.4))
+
+            Text("No wins yet")
+                .font(DesignSystem.Typography.bodySemibold(16))
+                .foregroundStyle(DesignSystem.Colors.secondaryText)
+
+            Text("Complete actions to see them here!")
+                .font(DesignSystem.Typography.body(14))
+                .foregroundStyle(DesignSystem.Colors.secondaryText.opacity(0.7))
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, DesignSystem.Spacing.xl)
+    }
+
+    // MARK: - Win Card
+
+    private func winCard(_ win: CompletedAction) -> some View {
+        HStack(spacing: DesignSystem.Spacing.md) {
+            // Category Icon
+            ZStack {
+                Circle()
+                    .fill(win.category.accentColor.opacity(0.15))
+                    .frame(width: 44, height: 44)
+
+                Image(systemName: win.iconName)
+                    .font(.system(size: 18))
+                    .foregroundStyle(win.category.accentColor)
+            }
+
+            // Title & Time
+            VStack(alignment: .leading, spacing: 4) {
+                Text(win.title)
+                    .font(DesignSystem.Typography.bodySemibold(15))
+                    .foregroundStyle(DesignSystem.Colors.primaryText)
+                    .lineLimit(1)
+
+                Text(formatDate(win.dateCompleted))
+                    .font(DesignSystem.Typography.body(12))
+                    .foregroundStyle(DesignSystem.Colors.secondaryText)
+            }
+
+            Spacer()
+
+            // Green Checkmark
+            Image(systemName: "checkmark.circle.fill")
+                .font(.system(size: 24))
+                .foregroundStyle(DesignSystem.Colors.sageGreen)
+        }
+        .padding(DesignSystem.Spacing.md)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(DesignSystem.Colors.cardBackground)
+                .shadow(
+                    color: .black.opacity(0.05),
+                    radius: 6,
+                    y: 3
+                )
+        )
+    }
+
+    private func formatDate(_ date: Date) -> String {
+        if Calendar.current.isDateInToday(date) {
+            return "Today, " + date.formatted(date: .omitted, time: .shortened)
+        } else if Calendar.current.isDateInYesterday(date) {
+            return "Yesterday, " + date.formatted(date: .omitted, time: .shortened)
+        } else {
+            return date.formatted(date: .abbreviated, time: .shortened)
+        }
     }
 }
 
 #Preview {
-    StreakView(
+    ProfileView(
         currentStreak: 7,
         longestStreak: 14,
         totalActions: 42

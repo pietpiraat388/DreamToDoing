@@ -6,8 +6,7 @@ import SwiftUI
 struct HomeView: View {
 
     @State private var viewModel: HomeViewModel
-    @State private var showHistory = false
-    @State private var showStreak = false
+    @State private var showProfile = false
 
     private let backgroundColor = DesignSystem.Colors.background
 
@@ -63,16 +62,12 @@ struct HomeView: View {
         .sheet(isPresented: $viewModel.showPaywall) {
             PaywallView(onPurchase: viewModel.unlockPremium)
         }
-        .sheet(isPresented: $showHistory) {
-            HistoryView()
-        }
-        .sheet(isPresented: $showStreak) {
-            StreakView(
+        .sheet(isPresented: $showProfile) {
+            ProfileView(
                 currentStreak: viewModel.currentStreak,
                 longestStreak: viewModel.longestStreak,
                 totalActions: viewModel.totalActionsCompleted
             )
-            .presentationDetents([.medium])
         }
         .sensoryFeedback(.success, trigger: viewModel.completedTodayCount)
     }
@@ -81,29 +76,8 @@ struct HomeView: View {
 
     private var headerView: some View {
         HStack {
-            // History Button (Left)
-            Button {
-                showHistory = true
-            } label: {
-                Image(systemName: "trophy.fill")
-                    .font(.system(size: 18))
-                    .foregroundStyle(DesignSystem.Colors.terracotta)
-                    .frame(width: 44, height: 44)
-                    .background(
-                        Circle()
-                            .fill(DesignSystem.Colors.cardBackground)
-                            .shadow(
-                                color: .black.opacity(DesignSystem.Card.shadowOpacity),
-                                radius: 6,
-                                y: 3
-                            )
-                    )
-            }
-
-            Spacer()
-
-            // Title (Center)
-            VStack(spacing: DesignSystem.Spacing.xs) {
+            // Title (Left-aligned for balance)
+            VStack(alignment: .leading, spacing: DesignSystem.Spacing.xs) {
                 Text("Dream to Doing")
                     .font(DesignSystem.Typography.header(24))
                     .foregroundStyle(DesignSystem.Colors.primaryText)
@@ -115,9 +89,9 @@ struct HomeView: View {
 
             Spacer()
 
-            // Streak Badge (Right) - Tappable
+            // Profile Button (Right) - Opens unified dashboard
             Button {
-                showStreak = true
+                showProfile = true
             } label: {
                 streakBadge
             }
