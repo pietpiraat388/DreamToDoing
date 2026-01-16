@@ -10,7 +10,7 @@
   },
   {
     "title": "Vision Board Moment",
-    "description": "Save one stunning travel photo to your camera roll. Let it remind you what you're building toward. Dream big, Boss.",
+    "description": "Save one stunning travel photo to your camera roll. Let it remind you what you're building toward. Dream big, Visionary.",
     "category": "adventure",
     "iconName": "photo.on.rectangle",
     "isPremium": false,
@@ -73,7 +73,7 @@
   },
   {
     "title": "Bucket List Brain Dump",
-    "description": "Write down 10 places you want to visit before you die. No filter, no budget limits. Dream wildly, Boss.",
+    "description": "Write down 10 places you want to visit before you die. No filter, no budget limits. Dream wildly.",
     "category": "adventure",
     "iconName": "list.bullet.clipboard",
     "isPremium": true,
@@ -109,7 +109,7 @@
   },
   {
     "title": "First Class Daydream",
-    "description": "Price out a business class ticket to your dream destination. Just to dream. You're manifesting luxury, Boss.",
+    "description": "Price out a business class ticket to your dream destination. Just to dream. You're manifesting luxury, Icon.",
     "category": "adventure",
     "iconName": "airplane.circle.fill",
     "isPremium": true,
@@ -145,7 +145,7 @@
   },
   {
     "title": "LinkedIn Lurk",
-    "description": "Check out one profile of someone you admire professionally. Study their path. Your roadmap is out there, Boss.",
+    "description": "Check out one profile of someone you admire professionally. Study their path. Your roadmap is out there.",
     "category": "career",
     "iconName": "person.crop.circle.badge.checkmark",
     "isPremium": false,
@@ -163,7 +163,7 @@
   },
   {
     "title": "Negotiate Practice",
-    "description": "Practice saying 'I'd like to discuss my compensation' out loud. Three times. The six-figure salary starts with your voice, Boss.",
+    "description": "Practice saying 'I'd like to discuss my compensation' out loud. Three times. The six-figure salary starts with your voice, Future CEO.",
     "category": "career",
     "iconName": "mic.fill",
     "isPremium": true,
@@ -199,7 +199,7 @@
   },
   {
     "title": "Mentor Message",
-    "description": "Reach out to someone whose career you admire. Ask one thoughtful question. Mentorship starts with a message, Boss.",
+    "description": "Reach out to someone whose career you admire. Ask one thoughtful question. Mentorship starts with a message.",
     "category": "career",
     "iconName": "message.fill",
     "isPremium": true,
@@ -316,7 +316,7 @@
   },
   {
     "title": "Affirmation Record",
-    "description": "Record a voice memo listing your strengths and what you're proud of. Play it back when you need a boost, Boss.",
+    "description": "Record a voice memo listing your strengths and what you're proud of. Play it back when you need a boost, Icon.",
     "category": "mindset",
     "iconName": "waveform.circle.fill",
     "isPremium": true,
@@ -334,7 +334,7 @@
   },
   {
     "title": "Comfort Zone Push",
-    "description": "Do one small thing that scares you today. Send that email. Make that call. Growth lives outside comfort, Boss.",
+    "description": "Do one small thing that scares you today. Send that email. Make that call. Growth lives outside comfort.",
     "category": "mindset",
     "iconName": "figure.walk.motion",
     "isPremium": true,
@@ -343,7 +343,7 @@
   },
   {
     "title": "Face Your Finances",
-    "description": "Open your bank app and look at your balance. No fear, no judgment. Financial freedom starts with awareness, Boss.",
+    "description": "Open your bank app and look at your balance. No fear, no judgment. Financial freedom starts with awareness, Future CEO.",
     "category": "finance",
     "iconName": "dollarsign.circle.fill",
     "isPremium": false,
@@ -388,7 +388,7 @@
   },
   {
     "title": "Net Worth Snapshot",
-    "description": "Calculate your total net worth: assets minus debts. This number isn't judgment—it's your starting line, Boss.",
+    "description": "Calculate your total net worth: assets minus debts. This number isn't judgment—it's your starting line.",
     "category": "finance",
     "iconName": "chart.pie.fill",
     "isPremium": true,
@@ -415,7 +415,7 @@
   },
   {
     "title": "Debt Payoff Plan",
-    "description": "List your debts from smallest to largest. The snowball method works. Pick one to attack first, Boss.",
+    "description": "List your debts from smallest to largest. The snowball method works. Pick one to attack first.",
     "category": "finance",
     "iconName": "arrow.down.circle.fill",
     "isPremium": true,
@@ -433,7 +433,7 @@
   },
   {
     "title": "Negotiate a Bill",
-    "description": "Call one service provider and ask for a better rate. The worst they can say is no. Fortune favors the bold, Boss.",
+    "description": "Call one service provider and ask for a better rate. The worst they can say is no. Fortune favors the bold.",
     "category": "finance",
     "iconName": "phone.fill",
     "isPremium": true,
